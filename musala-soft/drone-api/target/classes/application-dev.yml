@@ -1,0 +1,18 @@
+server:
+  port: 9000
+
+core:
+  service:
+    db:
+      password:
+      username: sa
+      driver-class-name: org.h2.Driver
+      url: jdbc:h2:mem:testing;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
+
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  jpa:
+    show-sql: true
