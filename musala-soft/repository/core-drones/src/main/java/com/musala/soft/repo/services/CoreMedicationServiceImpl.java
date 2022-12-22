@@ -22,6 +22,11 @@ public class CoreMedicationServiceImpl implements CoreMedicationService{
     }
 
     @Override
+    public Optional<CoreMedication> findByCode(String code) {
+        return coreMedicationRepository.findByCode(code);
+    }
+
+    @Override
     public Page<CoreMedication> findAll(String code, String name, Pageable pageable) {
         return coreMedicationRepository.findAll(pageable);
     }

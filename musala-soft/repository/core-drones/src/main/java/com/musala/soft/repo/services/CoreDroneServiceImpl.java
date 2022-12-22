@@ -3,7 +3,9 @@ package com.musala.soft.repo.services;
 import com.musala.soft.entity.drones.CoreDrone;
 import com.musala.soft.entity.drones.CoreDroneActivity;
 import com.musala.soft.entity.drones.CoreDroneTrip;
+import com.musala.soft.entity.drones.CoreMedicationDrone;
 import com.musala.soft.repo.repository.CoreDroneActivityRepository;
+import com.musala.soft.repo.repository.CoreDroneMedicationRepository;
 import com.musala.soft.repo.repository.CoreDroneRepository;
 import com.musala.soft.repo.repository.CoreDroneTripRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +24,16 @@ public class CoreDroneServiceImpl implements CoreDroneService {
     CoreDroneActivityRepository coreDroneActivityRepository;
     @Autowired
     CoreDroneTripRepository coreDroneTripRepository;
+    @Autowired
+    CoreDroneMedicationRepository coreDroneMedicationRepository;
     @Override
     public CoreDrone saveOrUpdate(CoreDrone coreDrone) {
         return coreDroneRepository.save(coreDrone);
+    }
+
+    @Override
+    public Optional<CoreDrone> findDroneWithSerialNumber(String serialNumber) {
+        return coreDroneRepository.findBySerialNumber(serialNumber);
     }
 
     @Override
@@ -65,6 +74,26 @@ public class CoreDroneServiceImpl implements CoreDroneService {
     @Override
     public Long getTotalCountOfDroneByDate(String date) {
         return 1L;
+    }
+
+    @Override
+    public CoreMedicationDrone saveOrUpdate(CoreMedicationDrone coreMedicationDrone) {
+        return coreDroneMedicationRepository.save(coreMedicationDrone);
+    }
+
+    @Override
+    public CoreDroneTrip findDroneTripByTripId(String tripId) {
+        return null;
+    }
+
+    @Override
+    public Optional<CoreDroneTrip> findByStatusAndDroneId(String status, Long droneId) {
+        return coreDroneTripRepository.findByStatusAndDroneId(status, droneId);
+    }
+
+    @Override
+    public List<CoreDrone> findAllDronesByStatus(String status) {
+        return coreDroneRepository.findByStatus(status);
     }
 
 //    @Override

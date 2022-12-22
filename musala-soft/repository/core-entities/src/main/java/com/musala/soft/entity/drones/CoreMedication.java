@@ -22,7 +22,7 @@ public class CoreMedication {
     Float weight;
     @Column(name = "Code")
     String code;
-    @Column(name = "Image")
+    @Column(name = "Image", length = 4000)
     byte[] image;
     @Column(name = "CreatedDt")
     Date createdDt;

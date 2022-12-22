@@ -9,5 +9,6 @@ import java.util.Optional;
 public interface CoreMedicationService {
     CoreMedication saveOrUpadate(CoreMedication coreMedication);
     Optional<CoreMedication> findById(Long id);
+    Optional<CoreMedication> findByCode(String code);
     Page<CoreMedication> findAll(String code, String name, Pageable pageable);
 }

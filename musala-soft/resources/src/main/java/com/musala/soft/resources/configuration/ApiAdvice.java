@@ -33,7 +33,7 @@ public class ApiAdvice {
         return responsePojo;
     }
 
-    @ExceptionHandler({ApiException.class, SQLException.class})
+    @ExceptionHandler({ApiException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public @ResponseBody RestResponsePojo<?> handleApiException(ApiException e, final Model model, HttpServletResponse response){
         log.error("Exception during execution of application " + e.getMessage());

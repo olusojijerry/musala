@@ -18,10 +18,21 @@ public class CoreMedicationDrone {
     Long id;
     @Column(name = "CreatedDt")
     Date createdDt;
-    @Column(name = "DroneId")
-    Long droneId;
     @Column(name = "MedicationId")
     Long medicationId;
     @Column(name = "Status")
     String status;
+    @Column(name = "Quantity", nullable = false)
+    Integer quantity;
+    @ManyToOne
+    @JoinColumn(name = "core_drone_trip_id")
+    private CoreDroneTrip coreDroneTrip;
+
+    public CoreDroneTrip getCoreDroneTrip() {
+        return coreDroneTrip;
+    }
+
+    public void setCoreDroneTrip(CoreDroneTrip coreDroneTrip) {
+        this.coreDroneTrip = coreDroneTrip;
+    }
 }

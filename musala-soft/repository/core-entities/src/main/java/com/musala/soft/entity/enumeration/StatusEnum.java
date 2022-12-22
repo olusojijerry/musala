@@ -25,8 +25,8 @@ public enum StatusEnum {
         return values;
     }
 
-    public String getValue(StatusEnum statusEnum){
-        return statusEnum.title;
+    public String getValue(){
+        return this.title;
     }
 
     public static StatusEnum getEnumFromString(String text){

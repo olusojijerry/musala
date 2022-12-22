@@ -1,9 +1,13 @@
 package com.musala.soft.api.endpoint;
 
 import com.musala.soft.api.dto.DroneDto;
+import com.musala.soft.api.dto.DroneMedResponse;
+import com.musala.soft.api.dto.LoadDroneWithMed;
+import com.musala.soft.api.dto.SetDroneStatus;
 import com.musala.soft.api.services.DroneService;
 import com.musala.soft.entity.drones.CoreDrone;
 import com.musala.soft.entity.drones.CoreDroneActivity;
+import com.musala.soft.entity.drones.CoreDroneTrip;
 import com.musala.soft.resources.pojo.RestResponsePojo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +42,53 @@ public class DroneEndpoint {
         return restResponsePojo;
     }
 
+    @PostMapping("/load/drone")
+    public RestResponsePojo<?> loadDroneWithMed(@RequestBody LoadDroneWithMed loadDroneWithMed){
+        RestResponsePojo<DroneMedResponse> restResponsePojo = new RestResponsePojo<>();
 
+        restResponsePojo.setData(droneService.loadDroneWithMedications(loadDroneWithMed));
+        restResponsePojo.setMessage("Successful");
+
+        return restResponsePojo;
+    }
+
+    @GetMapping("/check/loaded")
+    public RestResponsePojo<CoreDroneTrip> getTripsAndMedications(@RequestParam(name = "serialNumber")String serialNumber){
+        RestResponsePojo restResponsePojo = new RestResponsePojo<>();
+
+        restResponsePojo.setMessage("Successful");
+        restResponsePojo.setData(droneService.getCurrentDrone(serialNumber));
+
+        return restResponsePojo;
+    }
+
+    @PutMapping("")
+    public RestResponsePojo<CoreDrone> setDroneStatus(@RequestBody SetDroneStatus setDroneStatus){
+        RestResponsePojo<CoreDrone> restResponsePojo = new RestResponsePojo<>();
+
+        restResponsePojo.setMessage("Successful");
+        restResponsePojo.setData(droneService.updateDroneStatus(setDroneStatus));
+
+        return restResponsePojo;
+    }
+
+    @GetMapping("/check/available")
+    public RestResponsePojo<List<CoreDrone>> getTripsAndMedications(){
+        RestResponsePojo restResponsePojo = new RestResponsePojo<>();
+
+        restResponsePojo.setMessage("Successful");
+        restResponsePojo.setData(droneService.getAllAvailableDrones());
+
+        return restResponsePojo;
+    }
+
+    @GetMapping("/check/battery")
+    public RestResponsePojo<String> getBatteryLevel(@RequestParam(name = "serialNumber")String serialNumber){
+        RestResponsePojo<String> restResponsePojo = new RestResponsePojo<>();
+
+        restResponsePojo.setData(droneService.batteryLevel(serialNumber));
+        restResponsePojo.setMessage("Successful");
+
+        return restResponsePojo;
+    }
 }

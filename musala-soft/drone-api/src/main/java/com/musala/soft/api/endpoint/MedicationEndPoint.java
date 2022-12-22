@@ -28,6 +28,6 @@ public class MedicationEndPoint {
         restResponsePojo.setData(medicationService.createMedication(medicationDto));
 
         return restResponsePojo;
-
     }
+
 }

@@ -8,4 +8,5 @@ public class DroneDto {
     Float weight;
     Float batteryCapacity;
     String state;
+    String serial;
 }
