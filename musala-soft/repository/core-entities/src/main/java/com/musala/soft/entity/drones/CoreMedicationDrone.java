@@ -3,6 +3,8 @@ package com.musala.soft.entity.drones;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,21 +20,13 @@ public class CoreMedicationDrone {
     Long id;
     @Column(name = "CreatedDt")
     Date createdDt;
-    @Column(name = "MedicationId")
-    Long medicationId;
-    @Column(name = "Status")
-    String status;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "MedicationId")
+    CoreMedication medication;
     @Column(name = "Quantity", nullable = false)
     Integer quantity;
-    @ManyToOne
-    @JoinColumn(name = "core_drone_trip_id")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "DroneTripId", referencedColumnName = "Id")
     private CoreDroneTrip coreDroneTrip;
 
-    public CoreDroneTrip getCoreDroneTrip() {
-        return coreDroneTrip;
-    }
-
-    public void setCoreDroneTrip(CoreDroneTrip coreDroneTrip) {
-        this.coreDroneTrip = coreDroneTrip;
-    }
 }

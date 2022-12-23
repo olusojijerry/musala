@@ -10,6 +10,7 @@
         <module name="core-drones" />
         <module name="resources" />
         <module name="drone-api" />
+        <module name="drone-schduler" />
       </profile>
     </annotationProcessing>
   </component>

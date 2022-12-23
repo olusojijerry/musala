@@ -12,6 +12,7 @@
         <module>repository</module>
         <module>drone-api</module>
         <module>resources</module>
+        <module>drone-schduler</module>
     </modules>
 
     <properties>

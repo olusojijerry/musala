@@ -29,8 +29,6 @@ public class CoreDroneTrip {
     Long droneId;
     @Column(name = "Status", nullable = false)
     String status;
-    @OneToMany(mappedBy = "coreDroneTrip")
-    List<CoreMedicationDrone> medicationDrones;
     @Column(name = "LastActivityDt")
     Date lastActivityDt;
 }

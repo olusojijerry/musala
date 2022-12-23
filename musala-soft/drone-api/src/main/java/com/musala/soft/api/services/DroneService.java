@@ -102,7 +102,7 @@ public class DroneService {
             CoreMedication coreMedication = coreMedicationService.findByCode(tp.getMedicationCode())
                     .orElseThrow(() -> new ApiException("Medication does not exist with code " + tp.getMedicationCode()));
 
-            coreMedicationDrone.setMedicationId(coreMedication.getId());
+            coreMedicationDrone.setMedication(coreMedication);
             coreMedicationDrone.setStatus(StatusEnum.LOADING.getValue());
             coreMedicationDrone.setQuantity(tp.getQuantity());
             coreMedicationDrone.setCreatedDt(new Date());
@@ -150,12 +150,14 @@ public class DroneService {
         return response;
     }
 
-    public CoreDroneTrip getCurrentDrone(String droneSerial){
+    public List<CoreMedicationDrone> getCurrentDrone(String droneSerial){
         CoreDrone coreDrone = coreDroneService.findDroneWithSerialNumber(droneSerial)
                 .orElseThrow(()-> new ApiException("No drone exist with serial " + droneSerial));
 
-        return coreDroneService.findByStatusAndDroneId(StatusEnum.LOADED.getValue(), coreDrone.getId())
-                .orElseThrow(()-> new ApiException("No trip found for drone with serial " + droneSerial + " with status LOADED"));
+        CoreDroneTrip coreDroneTrip = coreDroneService.findTripByStatusAndDroneId
+                (StatusEnum.LOADED.getValue(), coreDrone.getId());
+
+        return coreDroneService.findAllMedicationForATrip(coreDroneTrip);
     }
 
     public CoreDrone updateDroneStatus(SetDroneStatus setDroneStatus){

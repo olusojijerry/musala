@@ -8,6 +8,7 @@ import com.musala.soft.api.services.DroneService;
 import com.musala.soft.entity.drones.CoreDrone;
 import com.musala.soft.entity.drones.CoreDroneActivity;
 import com.musala.soft.entity.drones.CoreDroneTrip;
+import com.musala.soft.entity.drones.CoreMedicationDrone;
 import com.musala.soft.resources.pojo.RestResponsePojo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,8 +54,8 @@ public class DroneEndpoint {
     }
 
     @GetMapping("/check/loaded")
-    public RestResponsePojo<CoreDroneTrip> getTripsAndMedications(@RequestParam(name = "serialNumber")String serialNumber){
-        RestResponsePojo restResponsePojo = new RestResponsePojo<>();
+    public RestResponsePojo<List<CoreMedicationDrone>> getTripsAndMedications(@RequestParam(name = "serialNumber")String serialNumber){
+        RestResponsePojo<List<CoreMedicationDrone>> restResponsePojo = new RestResponsePojo<>();
 
         restResponsePojo.setMessage("Successful");
         restResponsePojo.setData(droneService.getCurrentDrone(serialNumber));
@@ -86,9 +87,11 @@ public class DroneEndpoint {
     public RestResponsePojo<String> getBatteryLevel(@RequestParam(name = "serialNumber")String serialNumber){
         RestResponsePojo<String> restResponsePojo = new RestResponsePojo<>();
 
-        restResponsePojo.setData(droneService.batteryLevel(serialNumber));
+        restResponsePojo.setData(droneService.batteryLevel(serialNumber) + "%");
         restResponsePojo.setMessage("Successful");
 
         return restResponsePojo;
     }
+
+
 }
