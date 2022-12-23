@@ -6,10 +6,7 @@ import com.musala.soft.entity.drones.CoreMedication;
 import com.musala.soft.resources.pojo.RestResponsePojo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
@@ -21,7 +18,7 @@ public class MedicationEndPoint {
     MedicationService medicationService;
 
     @PostMapping("")
-    public RestResponsePojo<CoreMedication> createMedication(@ModelAttribute MedicationDto medicationDto) throws IOException {
+    public RestResponsePojo<CoreMedication> createMedication(@RequestBody MedicationDto medicationDto) throws IOException {
         RestResponsePojo<CoreMedication> restResponsePojo = new RestResponsePojo<>();
 
         restResponsePojo.setMessage("Successful");

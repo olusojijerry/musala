@@ -103,12 +103,16 @@ public class DroneService {
                     .orElseThrow(() -> new ApiException("Medication does not exist with code " + tp.getMedicationCode()));
 
             coreMedicationDrone.setMedication(coreMedication);
-            coreMedicationDrone.setStatus(StatusEnum.LOADING.getValue());
+//            coreMedicationDrone.setStatus(StatusEnum.LOADING.getValue());
             coreMedicationDrone.setQuantity(tp.getQuantity());
             coreMedicationDrone.setCreatedDt(new Date());
             coreMedicationDrone.setCoreDroneTrip(coreDroneTrip);
 
             totalWeight += coreMedication.getWeight() * tp.getQuantity();
+
+            if(tp.getQuantity() < 1){
+                throw new ApiException(tp.getMedicationCode() + " cannot have a quantity less than 1");
+            }
 
             if(totalWeight >= coreDrone.getWeight()){
                 throw new ApiException("Overloading of drone total weight cannot be more or equal to " + coreDrone.getWeight());
@@ -253,5 +257,29 @@ public class DroneService {
         Float batterylevel = coreDrone.getBatteryCapacity();
 
         return batterylevel.toString();
+    }
+
+    public List<CoreDrone> getAll(){
+        return coreDroneService.findAll();
+    }
+
+    public CoreDrone updateDroneBattery(CoreDrone coreDroneS){
+        CoreDrone coreDrone = coreDroneService.findDroneWithSerialNumber(coreDroneS.getSerialNumber())
+                .orElseThrow(()->new ApiException("Invalid serial number"));
+
+        CoreDroneActivity coreDroneActivity = new CoreDroneActivity();
+
+        coreDroneActivity.setBatteryCapacity(coreDrone.getBatteryCapacity());
+        coreDroneActivity.setDroneSerial(coreDrone.getSerialNumber());
+        coreDroneActivity.setAction("Update Drone Status");
+        coreDroneActivity.setCreatedDt(new Date());
+        coreDroneActivity.setStatus(coreDrone.getStatus());
+
+        coreDroneService.saveOrUpdate(coreDroneActivity);
+
+        coreDrone.setLastActivityDt(new Date());
+        coreDrone.setBatteryCapacity(coreDroneS.getBatteryCapacity());
+
+        return coreDroneService.saveOrUpdate(coreDrone);
     }
 }

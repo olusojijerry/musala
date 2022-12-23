@@ -26,12 +26,11 @@ public class MedicationService {
             throw new ApiException("Repeated Code Error: Code " +medicationDto.getCode()+ " already exist");
         }
 
-        String mimeType = medicationDto.getImage().getContentType();
-        byte[] image = medicationDto.getImage().getBytes();
+        byte[] image = medicationDto.getImage();
 
         coreMedication.setCreatedDt(new Date());
         coreMedication.setImage(image);
-        coreMedication.setImageType(mimeType);
+        coreMedication.setImageType(medicationDto.getImageType());
         coreMedication.setName(medicationDto.getName());
         coreMedication.setWeight(medicationDto.getWeight());
         coreMedication.setCode(medicationDto.getCode());

@@ -2,6 +2,7 @@ package com.musala.soft.entity.drones;
 
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;

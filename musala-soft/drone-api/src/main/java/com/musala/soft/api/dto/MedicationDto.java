@@ -7,7 +7,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Data
 @ToString
 public class MedicationDto {
-    MultipartFile image;
+    byte[] image;
+    String imageType;
     String name;
     Float weight;
     String code;

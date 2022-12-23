@@ -31,6 +31,8 @@ public interface CoreDroneService {
 
     List<CoreMedicationDrone> findAllMedicationForATrip(CoreDroneTrip coreDroneTrip);
 
+    List<CoreDrone> findAll();
+
 //    List<CoreDrone> findByStatus(String status);
 //    List<CoreDrone> findAll();
 }

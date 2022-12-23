@@ -106,6 +106,11 @@ public class CoreDroneServiceImpl implements CoreDroneService {
         return coreDroneMedicationRepository.findByCoreDroneTrip(coreDroneTrip);
     }
 
+    @Override
+    public List<CoreDrone> findAll() {
+        return coreDroneRepository.findAll();
+    }
+
 //    @Override
 //    public List<CoreDrone> findByStatus(String status) {
 //        return null;

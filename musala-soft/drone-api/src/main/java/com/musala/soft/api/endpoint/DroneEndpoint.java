@@ -1,9 +1,6 @@
 package com.musala.soft.api.endpoint;
 
-import com.musala.soft.api.dto.DroneDto;
-import com.musala.soft.api.dto.DroneMedResponse;
-import com.musala.soft.api.dto.LoadDroneWithMed;
-import com.musala.soft.api.dto.SetDroneStatus;
+import com.musala.soft.api.dto.*;
 import com.musala.soft.api.services.DroneService;
 import com.musala.soft.entity.drones.CoreDrone;
 import com.musala.soft.entity.drones.CoreDroneActivity;
@@ -88,6 +85,26 @@ public class DroneEndpoint {
         RestResponsePojo<String> restResponsePojo = new RestResponsePojo<>();
 
         restResponsePojo.setData(droneService.batteryLevel(serialNumber) + "%");
+        restResponsePojo.setMessage("Successful");
+
+        return restResponsePojo;
+    }
+
+    @GetMapping("/all")
+    public RestResponsePojo<List<CoreDrone>> getAllDrone(){
+        RestResponsePojo<List<CoreDrone>> restResponsePojo = new RestResponsePojo<>();
+
+        restResponsePojo.setMessage("Successful");
+        restResponsePojo.setData(droneService.getAll());
+
+        return restResponsePojo;
+    }
+
+    @PutMapping("/battery")
+    public RestResponsePojo<CoreDrone> updateBatteryLevel(@RequestBody CoreDrone batteryLevel){
+        RestResponsePojo<CoreDrone> restResponsePojo = new RestResponsePojo<>();
+
+        restResponsePojo.setData(droneService.updateDroneBattery(batteryLevel));
         restResponsePojo.setMessage("Successful");
 
         return restResponsePojo;
