@@ -3,13 +3,15 @@ package com.musala.soft.api.endpoint;
 import com.musala.soft.api.dto.MedicationDto;
 import com.musala.soft.api.services.MedicationService;
 import com.musala.soft.entity.drones.CoreMedication;
+import com.musala.soft.resources.exception.ApiException;
 import com.musala.soft.resources.pojo.RestResponsePojo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import javax.validation.*;
 import java.io.IOException;
+import java.util.Set;
 
 @RestController
 @RequestMapping("api/medication")
