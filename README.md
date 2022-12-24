@@ -1,6 +1,10 @@
 # musala
 Musala Soft Drones Project
 
+The project consist of two runnable module
+drone-api
+drone-scheduler
+
 Various Modules included in the project
 
 The database used to build the application is H2 in memory database
@@ -297,139 +301,4 @@ data describes the battery capacity.
 
 2. Drone Scheduler
   This is a service that runs on a CRON Job it is expected to update the drones battery capacity every 5min
-  
-3. Repository
-    This describes all the database entities
-    
-    Entities include
-    
-    CoreDrone (Full description of the drone)
-    
-    
-    @Table(name = "Drones", uniqueConstraints = @UniqueConstraint(columnNames = {"SerialNumber"}))
-@Entity
-@FieldDefaults(level = AccessLevel.PRIVATE)
-public class CoreDrone {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id")
-    Long id;
-    @Column(name = "SerialNumber", length = 100)
-    String serialNumber;
-    @Column(name = "Model")
-    String model;
-    @Column(name = "Weight")
-    Float weight;
-    @Column(name="Status")
-    String status;
-    @Column(name = "BatteryCapacity")
-    Float batteryCapacity;
-    @Column(name = "CreatedDt")
-    Date createdDt;
-    @Column(name = "LastActivityDt")
-    Date lastActivityDt;
-}
-
-CoreDroneActivity (Describing every activity done by the drone including update of status)
-
-@Table(name = "DroneActivity")
-@Entity
-@FieldDefaults(level = AccessLevel.PRIVATE)
-public class CoreDroneActivity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id")
-    Long id;
-    @Column(name = "Status")
-    String status;
-    @Column(name = "BatteryCapacity")
-    Float batteryCapacity;
-    @Column(name = "CreatedDt")
-    Date createdDt;
-    @Column(name = "DroneSerial")
-    String droneSerial;
-    @Column(name = "Destination")
-    String destination;
-    @Column(name = "Action")
-    String action;
-}
-
-
-CoreDroneTrip (Describing all the trips done by the drone)
-
-
-@Table(name = "DroneTrip")
-@Entity
-@FieldDefaults(level = AccessLevel.PRIVATE)
-public class CoreDroneTrip {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id")
-    Long id;
-    @Column(name = "TripId", nullable = false)
-    String tripId;
-    @Column(name = "Destination", nullable = false)
-    String destination;
-    @Column(name = "Distance", nullable = false)
-    Long distance;
-    @Column(name = "CreatedDt", nullable = false)
-    Date createdDt;
-    @Column(name = "DroneId", nullable = false)
-    Long droneId;
-    @Column(name = "Status", nullable = false)
-    String status;
-    @Column(name = "LastActivityDt")
-    Date lastActivityDt;
-}
-
-
-CoreMedication (Describing all existing medication on the system)
-
-@Table(name = "Medications", uniqueConstraints = @UniqueConstraint(columnNames = "Code"))
-@Entity
-@FieldDefaults(level = AccessLevel.PRIVATE)
-public class CoreMedication {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id")
-    Long id;
-    @Column(name = "Name")
-    String name;
-    @Column(name = "Weight")
-    Float weight;
-    @Column(name = "Code")
-    String code;
-    @Column(name = "Image", length = 4000)
-    byte[] image;
-    @Column(name = "CreatedDt")
-    Date createdDt;
-    @Column(name = "LastActivityDt")
-    Date lastActivityDt;
-    @Column(name = "ImageType")
-    String imageType;
-}
-
-CoreMedicationDrone (describing the drone and the medication it has carried for delivery)
-
-@Table(name = "MedicationDrone")
-@Entity
-@FieldDefaults(level = AccessLevel.PRIVATE)
-public class CoreMedicationDrone {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id")
-    Long id;
-    @Column(name = "CreatedDt")
-    Date createdDt;
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "MedicationId")
-    CoreMedication medication;
-    @Column(name = "Quantity", nullable = false)
-    Integer quantity;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "DroneTripId", referencedColumnName = "Id")
-    private CoreDroneTrip coreDroneTrip;
-
-}
-
 
