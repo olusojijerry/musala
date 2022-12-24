@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.*;
 import java.util.List;
 
 @RestController
@@ -21,7 +22,7 @@ public class DroneEndpoint {
     DroneService droneService;
 
     @PostMapping("")
-    public RestResponsePojo<CoreDrone> createDrone(@RequestBody DroneDto droneDto){
+    public RestResponsePojo<CoreDrone> createDrone(@Valid @RequestBody DroneDto droneDto){
         RestResponsePojo<CoreDrone> restResponsePojo = new RestResponsePojo<>();
 
         restResponsePojo.setMessage("Successful");
@@ -41,7 +42,7 @@ public class DroneEndpoint {
     }
 
     @PostMapping("/load/drone")
-    public RestResponsePojo<?> loadDroneWithMed(@RequestBody LoadDroneWithMed loadDroneWithMed){
+    public RestResponsePojo<?> loadDroneWithMed(@Valid @RequestBody LoadDroneWithMed loadDroneWithMed){
         RestResponsePojo<DroneMedResponse> restResponsePojo = new RestResponsePojo<>();
 
         restResponsePojo.setData(droneService.loadDroneWithMedications(loadDroneWithMed));
@@ -61,7 +62,7 @@ public class DroneEndpoint {
     }
 
     @PutMapping("")
-    public RestResponsePojo<CoreDrone> setDroneStatus(@RequestBody SetDroneStatus setDroneStatus){
+    public RestResponsePojo<CoreDrone> setDroneStatus(@Valid @RequestBody SetDroneStatus setDroneStatus){
         RestResponsePojo<CoreDrone> restResponsePojo = new RestResponsePojo<>();
 
         restResponsePojo.setMessage("Successful");
@@ -81,7 +82,7 @@ public class DroneEndpoint {
     }
 
     @GetMapping("/check/battery")
-    public RestResponsePojo<String> getBatteryLevel(@RequestParam(name = "serialNumber")String serialNumber){
+    public RestResponsePojo<String> getBatteryLevel(@Valid @RequestParam(name = "serialNumber")String serialNumber){
         RestResponsePojo<String> restResponsePojo = new RestResponsePojo<>();
 
         restResponsePojo.setData(droneService.batteryLevel(serialNumber) + "%");
@@ -101,7 +102,7 @@ public class DroneEndpoint {
     }
 
     @PutMapping("/battery")
-    public RestResponsePojo<CoreDrone> updateBatteryLevel(@RequestBody CoreDrone batteryLevel){
+    public RestResponsePojo<CoreDrone> updateBatteryLevel(@Valid @RequestBody CoreDrone batteryLevel){
         RestResponsePojo<CoreDrone> restResponsePojo = new RestResponsePojo<>();
 
         restResponsePojo.setData(droneService.updateDroneBattery(batteryLevel));

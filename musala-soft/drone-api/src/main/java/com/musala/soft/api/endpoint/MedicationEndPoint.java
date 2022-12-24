@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.io.IOException;
 
 @RestController
@@ -18,7 +19,7 @@ public class MedicationEndPoint {
     MedicationService medicationService;
 
     @PostMapping("")
-    public RestResponsePojo<CoreMedication> createMedication(@RequestBody MedicationDto medicationDto) throws IOException {
+    public RestResponsePojo<CoreMedication> createMedication(@Valid @RequestBody MedicationDto medicationDto) throws IOException {
         RestResponsePojo<CoreMedication> restResponsePojo = new RestResponsePojo<>();
 
         restResponsePojo.setMessage("Successful");

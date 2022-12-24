@@ -5,7 +5,7 @@ server:
 spring:
   drone:
     scheduling:
-      drone-status: '* * * * * *'
+      drone-status: '0 0/5 * * * ?'
   h2:
     console:
       enabled: true
