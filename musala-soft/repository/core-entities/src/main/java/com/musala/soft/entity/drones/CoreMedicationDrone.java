@@ -25,8 +25,17 @@ public class CoreMedicationDrone {
     CoreMedication medication;
     @Column(name = "Quantity", nullable = false)
     Integer quantity;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "DroneTripId", referencedColumnName = "Id")
     private CoreDroneTrip coreDroneTrip;
 
+    public CoreMedicationDrone() {
+    }
+
+    public CoreMedicationDrone(CoreMedication medication, Integer quantity, CoreDroneTrip coreDroneTrip) {
+        this.medication = medication;
+        this.quantity = quantity;
+        this.coreDroneTrip = coreDroneTrip;
+        this.createdDt = new Date();
+    }
 }

@@ -111,6 +111,26 @@ public class CoreDroneServiceImpl implements CoreDroneService {
         return coreDroneRepository.findAll();
     }
 
+    @Override
+    public CoreDrone saveOrUpdateFlush(CoreDrone coreDrone) {
+        return coreDroneRepository.saveAndFlush(coreDrone);
+    }
+
+    @Override
+    public CoreMedicationDrone saveOrUpdateFlush(CoreMedicationDrone coreMedicationDrone) {
+        return coreDroneMedicationRepository.saveAndFlush(coreMedicationDrone);
+    }
+
+    @Override
+    public CoreDroneTrip saveOrUpdateFlush(CoreDroneTrip coreDroneTrip) {
+        return coreDroneTripRepository.saveAndFlush(coreDroneTrip);
+    }
+
+    @Override
+    public CoreDroneActivity saveOrUpdateFlush(CoreDroneActivity coreDroneActivity) {
+        return coreDroneActivityRepository.saveAndFlush(coreDroneActivity);
+    }
+
 //    @Override
 //    public List<CoreDrone> findByStatus(String status) {
 //        return null;

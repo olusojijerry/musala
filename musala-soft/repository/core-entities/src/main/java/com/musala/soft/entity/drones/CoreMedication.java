@@ -30,4 +30,15 @@ public class CoreMedication {
     Date lastActivityDt;
     @Column(name = "ImageType")
     String imageType;
+
+    public CoreMedication() {
+    }
+
+    public CoreMedication(String name, Float weight, String code, byte[] image, String imageType) {
+        this.name = name;
+        this.weight = weight;
+        this.code = code;
+        this.image = image;
+        this.imageType = imageType;
+    }
 }

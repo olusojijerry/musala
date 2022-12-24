@@ -30,4 +30,9 @@ public class CoreMedicationServiceImpl implements CoreMedicationService{
     public Page<CoreMedication> findAll(String code, String name, Pageable pageable) {
         return coreMedicationRepository.findAll(pageable);
     }
+
+    @Override
+    public CoreMedication saveOrUpdateFlush(CoreMedication coreMedication) {
+        return coreMedicationRepository.saveAndFlush(coreMedication);
+    }
 }

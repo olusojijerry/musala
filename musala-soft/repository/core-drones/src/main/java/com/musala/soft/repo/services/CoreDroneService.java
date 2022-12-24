@@ -33,6 +33,11 @@ public interface CoreDroneService {
 
     List<CoreDrone> findAll();
 
+    CoreDrone saveOrUpdateFlush(CoreDrone coreDrone);
+    CoreMedicationDrone saveOrUpdateFlush(CoreMedicationDrone coreMedicationDrone);
+    CoreDroneTrip saveOrUpdateFlush(CoreDroneTrip coreDroneTrip);
+    CoreDroneActivity saveOrUpdateFlush(CoreDroneActivity coreDroneActivity);
+
 //    List<CoreDrone> findByStatus(String status);
 //    List<CoreDrone> findAll();
 }

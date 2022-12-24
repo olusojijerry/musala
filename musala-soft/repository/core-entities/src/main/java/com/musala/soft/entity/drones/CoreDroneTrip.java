@@ -31,4 +31,16 @@ public class CoreDroneTrip {
     String status;
     @Column(name = "LastActivityDt")
     Date lastActivityDt;
+
+    public CoreDroneTrip() {
+    }
+
+    public CoreDroneTrip(String tripId, String destination, Long distance, Long droneId, String status) {
+        this.tripId = tripId;
+        this.destination = destination;
+        this.distance = distance;
+        this.droneId = droneId;
+        this.status = status;
+        this.createdDt=new Date();
+    }
 }

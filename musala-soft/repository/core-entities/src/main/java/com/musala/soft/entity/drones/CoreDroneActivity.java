@@ -28,4 +28,16 @@ public class CoreDroneActivity {
     String destination;
     @Column(name = "Action")
     String action;
+
+    public CoreDroneActivity() {
+    }
+
+    public CoreDroneActivity(CoreDrone coreDrone, String action, String destination){
+        this.setStatus(coreDrone.getStatus());
+        this.setDroneSerial(coreDrone.getSerialNumber());
+        this.setAction(action);
+        this.setCreatedDt(new Date());
+        this.setDestination(destination);
+        this.setBatteryCapacity(coreDrone.getBatteryCapacity());
+    }
 }

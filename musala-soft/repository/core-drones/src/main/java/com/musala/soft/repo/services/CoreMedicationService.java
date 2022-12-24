@@ -11,4 +11,5 @@ public interface CoreMedicationService {
     Optional<CoreMedication> findById(Long id);
     Optional<CoreMedication> findByCode(String code);
     Page<CoreMedication> findAll(String code, String name, Pageable pageable);
+    CoreMedication saveOrUpdateFlush(CoreMedication coreMedication);
 }

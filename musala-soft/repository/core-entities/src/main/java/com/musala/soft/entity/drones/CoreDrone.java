@@ -31,4 +31,15 @@ public class CoreDrone {
     Date createdDt;
     @Column(name = "LastActivityDt")
     Date lastActivityDt;
+
+    public CoreDrone() {
+    }
+
+    public CoreDrone(String serialNumber, String model, Float weight, String status, Float batteryCapacity) {
+        this.serialNumber = serialNumber;
+        this.model = model;
+        this.weight = weight;
+        this.status = status;
+        this.batteryCapacity = batteryCapacity;
+    }
 }
